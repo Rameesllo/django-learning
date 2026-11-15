@@ -1,7 +1,7 @@
-from django.http import jsonResponse 
+from django.http import JsonResponse 
 
 # Create your views here.
 def home(request):
-    return jsonResponse({   "message": "Welcome to DevTrack!",
+    return JsonResponse({   "message": "Welcome to DevTrack!",
         "developer": "Ramees",
         "framework": "Django"})
