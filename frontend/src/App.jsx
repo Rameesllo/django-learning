@@ -21,6 +21,7 @@ function App() {
           <h2>{data.message}</h2>
           <p>Developer: {data.developer}</p>
           <p>Framework: {data.framework}</p>
+          <p>Age: {data.age}</p>
         </div>
       ) : (
         <p>Loading...</p>

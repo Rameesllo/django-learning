@@ -4,4 +4,5 @@ from django.http import JsonResponse
 def home(request):
     return JsonResponse({   "message": "Welcome to DevTrack!",
         "developer": "Ramees",
-        "framework": "Django"})
+        "framework": "Django",
+        "age": 25})
