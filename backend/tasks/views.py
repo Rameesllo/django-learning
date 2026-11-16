@@ -29,9 +29,13 @@ def task_list(request):
 
         return Response(serializer.errors, status=400)
 
-@api_view(['PATCH'])
+@api_view(['PATCH','DELETE'])
 def task_detail(request, pk):
     task = Task.objects.get(pk=pk)
+
+    if request.method == 'DELETE':
+        task.delete()
+        return Response(status)
 
     serializer = TaskSerializer(
         task,
