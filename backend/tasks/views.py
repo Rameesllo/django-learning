@@ -1,4 +1,9 @@
 from django.http import JsonResponse 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Task
+from .serializers import TaskSerializer
 
 # Create your views here.
 def home(request):
@@ -6,11 +11,6 @@ def home(request):
         "developer": "Ramees",
         "framework": "Django",
         "age": 25})
-
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .models import Task
-from .serializers import TaskSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -28,3 +28,19 @@ def task_list(request):
             return Response(serializer.data)
 
         return Response(serializer.errors, status=400)
+
+@api_view(['PATCH'])
+def task_detail(request, pk):
+    task = Task.objects.get(pk=pk)
+
+    serializer = TaskSerializer(
+        task,
+        data=request.data,
+        partial=True
+    )
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+
+    return Response(serializer.errors, status=400)    
