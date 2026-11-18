@@ -29,7 +29,7 @@ function App() {
       <main className="mx-auto max-w-5xl px-6 py-10">
 
         <h2 className="text-3xl font-bold">
-          Good morning 👋
+          Good morning.....
         </h2>
 
         <p className="mt-2 text-gray-500">
