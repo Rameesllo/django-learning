@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Task
 from .serializers import TaskSerializer
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def home(request):
@@ -29,9 +30,9 @@ def task_list(request):
 
         return Response(serializer.errors, status=400)
 
-@api_view(['PATCH','DELETE'])
+@api_view(['GET','PATCH','DELETE'])
 def task_detail(request, pk):
-    task = Task.objects.get(pk=pk)
+    task = get_object_or_404(Task, pk=pk)
 
     if request.method == 'DELETE':
         task.delete()
