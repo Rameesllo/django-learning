@@ -39,7 +39,7 @@ function App() {
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
 
           <div className="rounded-xl bg-white p-6 shadow-sm">
-            <p className="text-gray-500">Total Tasks</p>
+            <p className="text-gray-500">Total Tasks.</p>
             <h3 className="mt-2 text-3xl font-bold">03</h3>
           </div>
 
