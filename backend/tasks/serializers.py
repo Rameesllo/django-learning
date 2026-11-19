@@ -16,3 +16,13 @@ class TaskSerializer(serializers.ModelSerializer):
             )
 
         return value
+
+    def validate_status(self, value):
+        allowed_statuses = ["pending", "completed"]
+
+        if value not in allowed_statuses:
+            raise serializers.ValidationError(
+                "Status must be pending or completed."
+            )
+
+        return value
