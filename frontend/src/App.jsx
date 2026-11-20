@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react'
 function App() {
   const [data, setData] = useState(null)
   const [tasks , setTasks] = useState([])
-  const [form , setForm] = useState(false)
+  const [showForm , setShowForm] = useState(false)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/')
@@ -69,9 +71,35 @@ const completedTasks = tasks.filter(
             Recent Tasks.
           </h2>
 
-          <button className="rounded-lg bg-emerald-600 px-4 py-2 ml-216 mb-1 text-white">
+          <button className="rounded-lg bg-emerald-600 px-4 py-2 ml-216 mb-1 text-white"
+            onClick={() => setShowForm(!showForm)}
+          >
             + Add Task
           </button>
+
+          {showForm && (
+  <div className="mb-6 rounded-xl border bg-white p-6 shadow-sm">
+    <h3 className="mb-4 text-lg font-bold">
+      Create New Task
+    </h3>
+
+    <input
+      type="text"
+      placeholder="Enter task title"
+      className="mb-3 w-full rounded-lg border p-3"
+    />
+
+    <textarea
+      placeholder="Enter task description"
+      className="mb-3 w-full rounded-lg border p-3"
+    />
+
+    <button className="rounded-lg bg-emerald-600 px-5 py-2 text-white">
+      Create Task
+    </button>
+  </div>
+)}
+
 
           <div className="space-y-3">
 
