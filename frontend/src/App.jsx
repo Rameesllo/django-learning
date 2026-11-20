@@ -1,6 +1,8 @@
 
 import { useEffect, useState } from 'react'
 
+const [tasks , setTasks] = useState([])
+
 function App() {
   const [data, setData] = useState(null)
 
@@ -11,11 +13,14 @@ function App() {
       .catch(error => console.error(error))
   }, [])
 
-  const tasks = [
-    { id: 1, title: 'Learn Django', status: 'In Progress' },
-    { id: 2, title: 'Build React UI', status: 'Completed' },
-    { id: 3, title: 'Connect PostgreSQL', status: 'Pending' },
-  ]
+  useEffect(()=>{
+    fetch('http://127.0.0.1:8000/api/tasks/')
+    .then(response => response.json())
+    .then(result => setTasks(result))
+    .catch(error => console.error('error fetching tasks:', error))
+  }, [])
+
+  
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
