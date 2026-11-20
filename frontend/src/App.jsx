@@ -1,11 +1,12 @@
 
 import { useEffect, useState } from 'react'
 
-const [tasks , setTasks] = useState([])
+
 
 function App() {
   const [data, setData] = useState(null)
-
+  const [tasks , setTasks] = useState([])
+  
   useEffect(() => {
     fetch('http://127.0.0.1:8000/')
       .then(response => response.json())
