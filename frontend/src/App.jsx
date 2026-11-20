@@ -21,7 +21,11 @@ function App() {
     .catch(error => console.error('error fetching tasks:', error))
   }, [])
 
-  
+  const totalTasks = tasks.length
+
+const completedTasks = tasks.filter(
+  task => task.status === 'completed'
+).length
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
@@ -46,13 +50,13 @@ function App() {
 
           <div className="rounded-xl bg-white p-6 shadow-sm">
             <p className="text-gray-500">Total Tasks.</p>
-            <h3 className="mt-2 text-3xl font-bold">03</h3>
+            <h3 className="mt-2 text-3xl font-bold">{totalTasks}</h3>
           </div>
 
           <div className="rounded-xl bg-white p-6 shadow-sm">
             <p className="text-gray-500">Completed Tasks</p>
             <h3 className="mt-2 text-3xl font-bold text-emerald-600">
-              01
+              {completedTasks}
             </h3>
           </div>
 
