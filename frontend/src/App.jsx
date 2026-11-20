@@ -32,38 +32,42 @@ function App() {
     task => task.status === 'completed'
   ).length
 
-  // Handle create button
+  // Handle create task
   const handleCreateTask = () => {
-
-  fetch('http://127.0.0.1:8000/api/tasks/', {
-    method: 'POST',
-
-    headers: {
-      'Content-Type': 'application/json'
-    },
-
-    body: JSON.stringify({
-      title: title,
-      description: description,
-      status: 'pending'
+    fetch('http://127.0.0.1:8000/api/tasks/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        status: 'pending'
+      })
     })
+      .then(async response => {
+        const result = await response.json()
 
-  })
-    .then(response => response.json())
-    .then(result => {
-    console.log('Task created:', result)
+        // Handle API validation errors
+        if (!response.ok) {
+          setError(result.title?.[0] || 'Something went wrong')
+          return
+        }
 
-     setTasks([...tasks, result])
+        // Task created successfully
+        setError('')
+        console.log('Task created:', result)
 
-     setTitle('')
-     setDescription('')
-     setShowForm(false)
-  })
-    .catch(error => {
-      console.error('Error creating task:', error)
-    })
+        setTasks(prevTasks => [...prevTasks, result])
 
-}
+        setTitle('')
+        setDescription('')
+        setShowForm(false)
+      })
+      .catch(error => {
+        console.error('Error creating task:', error)
+      })
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
@@ -112,7 +116,10 @@ function App() {
             </h2>
 
             <button
-              onClick={() => setShowForm(!showForm)}
+              onClick={() => {
+                setShowForm(!showForm)
+                setError('')
+              }}
               className="rounded-lg bg-emerald-600 px-4 py-2 text-white"
             >
               + Add Task
@@ -141,6 +148,13 @@ function App() {
                 onChange={(e) => setDescription(e.target.value)}
                 className="mb-3 w-full rounded-lg border p-3"
               />
+
+              {/* Validation Error */}
+              {error && (
+                <p className="mb-3 text-sm text-red-600">
+                  {error}
+                </p>
+              )}
 
               <button
                 onClick={handleCreateTask}
