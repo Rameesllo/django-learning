@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 function App() {
   const [data, setData] = useState(null)
   const [tasks , setTasks] = useState([])
-  
+
   useEffect(() => {
     fetch('http://127.0.0.1:8000/')
       .then(response => response.json())
@@ -61,7 +61,7 @@ function App() {
         <section className="mt-10">
 
           <h2 className="mb-5 text-xl font-bold">
-            Recent Tasks....111hytd
+            Recent Tasks.
           </h2>
 
           <div className="space-y-3">
