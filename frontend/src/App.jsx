@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 function App() {
   const [data, setData] = useState(null)
   const [tasks , setTasks] = useState([])
+  const [form , setForm] = useState(false)
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/')
@@ -64,9 +65,13 @@ const completedTasks = tasks.filter(
 
         <section className="mt-10">
 
-          <h2 className="mb-5 text-xl font-bold">
+          <h2 className="mb-5 text-xl font-bold ">
             Recent Tasks.
           </h2>
+
+          <button className="rounded-lg bg-emerald-600 px-4 py-2 ml-216 mb-1 text-white">
+            + Add Task
+          </button>
 
           <div className="space-y-3">
 
