@@ -5,7 +5,7 @@ function App() {
   const [data, setData] = useState(null)
   const [tasks, setTasks] = useState([])
   const [showForm, setShowForm] = useState(false)
-
+  const [error, setError] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
@@ -51,8 +51,14 @@ function App() {
   })
     .then(response => response.json())
     .then(result => {
-      console.log('Task created:', result)
-    })
+    console.log('Task created:', result)
+
+     setTasks([...tasks, result])
+
+     setTitle('')
+     setDescription('')
+     setShowForm(false)
+  })
     .catch(error => {
       console.error('Error creating task:', error)
     })
